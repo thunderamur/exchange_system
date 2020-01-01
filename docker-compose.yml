@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+
+  db:
+    image: postgres:12
+    env_file:
+      - exchange_system.env
+
+  web:
+    build: ./web
+    env_file:
+      - exchange_system.env
+    links:
+      - db
+    expose:
+      - "8000"
+    command: bash -c "python manage.py migrate && python manage.py collectstatic --no-input && gunicorn project.wsgi --bind :8000"
+    volumes:
+      - ./web:/app
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./web/static:/app/static
+      - ./config/nginx:/etc/nginx/conf.d
+    depends_on:
+      - web
