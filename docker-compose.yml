@@ -6,6 +6,8 @@ services:
     image: postgres:12
     env_file:
       - exchange_system.env
+    ports:
+      - "5432:5432"
 
   web:
     build: ./web
@@ -15,7 +17,7 @@ services:
       - db
     expose:
       - "8000"
-    command: bash -c "python manage.py migrate && python manage.py collectstatic --no-input && gunicorn project.wsgi --bind :8000"
+    command: bash -c "python manage.py collectstatic --no-input && gunicorn project.wsgi --bind :8000"
     volumes:
       - ./web:/app
     depends_on:
