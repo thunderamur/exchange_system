@@ -8,19 +8,24 @@ class Currency(models.Model):
     RUB = 'RUB'
     BTC = 'BTC'
 
-    CURRENCY_CHOICES = (
-        (EUR, EUR),
-        (USD, USD),
-        (GBP, GBP),
-        (RUB, RUB),
-        (BTC, BTC),
-    )
+    CURRENCIES = [
+        EUR,
+        USD,
+        GBP,
+        RUB,
+        BTC,
+    ]
+
+    CURRENCY_CHOICES = tuple((c, c) for c in CURRENCIES)
 
     BASE = EUR
 
     currency = models.CharField(choices=CURRENCY_CHOICES, max_length=3)
-    rate = models.DecimalField(max_digits=10, decimal_places=4)
+    rate = models.FloatField()
     datetime = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.currency}: {self.rate} ({self.datetime})'
 
     class Meta:
         ordering = ['-datetime']
