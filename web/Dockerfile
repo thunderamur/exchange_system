@@ -14,5 +14,10 @@ COPY requirements.txt ./
 RUN pip install -r requirements.txt && rm -f requirements.txt
 
 COPY config/cron/web /etc/cron.d/web
+RUN chmod 0644 /etc/cron.d/web
+
+COPY config/sv/supervisor.conf /etc/supervisor/conf.d/supervisor.conf
+COPY exchange_system.env /etc/environment
+COPY ./ /app
 
 ENTRYPOINT /usr/bin/supervisord

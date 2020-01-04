@@ -16,9 +16,7 @@ services:
     expose:
       - "8000"
     volumes:
-      - ./web:/app
-      - ./web/config/sv/supervisor.conf:/etc/supervisor/conf.d/supervisor.conf
-      - ./web/exchange_system.env:/etc/environment
+      - static:/app/static
     depends_on:
       - db
 
@@ -27,7 +25,10 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./web/static:/app/static
+      - static:/app/static
       - ./web/config/nginx:/etc/nginx/conf.d
     depends_on:
       - web
+
+volumes:
+  static:
