@@ -13,10 +13,12 @@ services:
 
   web:
     build: ./web
+    env_file:
+      - ./web/exchange_system.env
     expose:
       - "8000"
     volumes:
-      - static:/app/static
+      - ./web:/app
     networks:
       - webnet
       - dbnet
@@ -28,15 +30,12 @@ services:
     ports:
       - "80:8000"
     volumes:
-      - static:/app/static
+      - ./web/static:/app/static
       - ./web/config/nginx:/etc/nginx/conf.d
     depends_on:
       - web
     networks:
       - webnet
-
-volumes:
-  static:
 
 networks:
   dbnet:

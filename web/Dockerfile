@@ -18,6 +18,5 @@ RUN chmod 0644 /etc/cron.d/web
 
 COPY config/sv/supervisor.conf /etc/supervisor/conf.d/supervisor.conf
 COPY exchange_system.env /etc/environment
-COPY ./ /app
 
 ENTRYPOINT /usr/bin/supervisord
