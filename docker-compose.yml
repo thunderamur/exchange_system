@@ -8,27 +8,38 @@ services:
       - ./web/exchange_system.env
     ports:
       - "5432:5432"
+    networks:
+      - dbnet
 
   web:
     build: ./web
-    links:
-      - db
     expose:
       - "8000"
     volumes:
       - static:/app/static
+    networks:
+      - webnet
+      - dbnet
     depends_on:
       - db
 
   nginx:
     image: nginx:latest
     ports:
-      - "8000:8000"
+      - "80:8000"
     volumes:
       - static:/app/static
       - ./web/config/nginx:/etc/nginx/conf.d
     depends_on:
       - web
+    networks:
+      - webnet
 
 volumes:
   static:
+
+networks:
+  dbnet:
+    driver: bridge
+  webnet:
+    driver: bridge
