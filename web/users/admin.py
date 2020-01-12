@@ -1,3 +1,16 @@
 from django.contrib import admin
+from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
 
-# Register your models here.
+
+User = get_user_model()
+
+
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    fields = ['email', 'currency', 'get_balance', 'is_staff', 'is_superuser']
+    readonly_fields = ['get_balance']
+
+    def get_balance(self, obj):
+        return obj.get_balance()
+    get_balance.short_description = _('Balance')
