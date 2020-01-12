@@ -1,18 +1,16 @@
 from django.contrib.auth import get_user_model
-from django.db import transaction
-from django.http import JsonResponse
 from rest_framework import status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from balances.models import Balance
 from users.serializers import UserCreateSerializer, UserSerializer
 
 User = get_user_model()
 
 
 class UserAPIView(APIView):
-    permission_classes = [permissions.IsAdminUser]
+    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.AllowAny]
 
     def get(self, request):
         user_id = request.GET.get('user_id')

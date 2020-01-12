@@ -11,8 +11,9 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['email', 'currency']
 
 
-class UserCreateSerializer(UserSerializer):
+class UserCreateSerializer(serializers.ModelSerializer):
     start_balance = serializers.DecimalField(label=_('Start balance'), max_digits=10, decimal_places=2)
 
     class Meta:
+        model = User
         fields = ['email', 'password', 'currency', 'start_balance']

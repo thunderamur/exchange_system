@@ -7,6 +7,9 @@ from currencies.models import Currency
 
 
 class UserManager(BaseUserManager):
+    def create(self, email, password=None, currency=None, start_balance=0):
+        return self.create_user(email=email, password=password, currency=currency, start_balance=start_balance)
+
     def create_user(self, email, password=None, currency=None, start_balance=0):
         if not email:
             raise ValueError('Users must have an email address')
