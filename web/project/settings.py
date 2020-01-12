@@ -46,8 +46,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     'balances',
-    'users',
     'currencies',
+    'transactions',
+    'users',
 ]
 
 MIDDLEWARE = [
