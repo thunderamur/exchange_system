@@ -14,8 +14,10 @@ class UserAPIView(APIView):
 
     def get(self, request):
         user_id = request.GET.get('user_id')
-        user = User.objects.filter(id=user_id)
-        serializer = UserSerializer(user, many=True)
+        q = User.objects
+        if user_id:
+            q = q.filter(id=user_id)
+        serializer = UserSerializer(q, many=True)
 
         return Response({'data': serializer.data})
 

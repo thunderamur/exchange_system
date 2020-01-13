@@ -9,6 +9,7 @@ User = get_user_model()
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     fields = ['email', 'currency', 'get_balance', 'is_staff', 'is_superuser']
+    list_display = fields
     readonly_fields = ['get_balance']
 
     def get_balance(self, obj):

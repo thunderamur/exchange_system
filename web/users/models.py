@@ -61,9 +61,29 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    def save(self, *args, **kwargs):
-        self.username = self.email
-        super().save(*args, **kwargs)
+    # def save(self, start_balance=0, *args, **kwargs,):
+    #     email = kwargs.get('email')
+    #     password = kwargs.get('password')
+    #     currency = kwargs.get('currency')
+    #
+    #     user = User(
+    #         email=email,
+    #         currency=currency,
+    #     )
+    #     user.set_password(password)
+    #
+    #     balance = Balance(
+    #         user=user,
+    #         currency=currency,
+    #         amount=start_balance,
+    #         flow=start_balance,
+    #     )
+    #
+    #     with transaction.atomic():
+    #         super().save(*args, **kwargs)
+    #         balance.save()
 
     def get_balance(self):
-        return Balance.objects.filter(user=self.id).order_by('id').last().amount
+        balance = Balance.objects.filter(user=self.id).order_by('id').last()
+        if balance:
+            return Balance.objects.filter(user=self.id).order_by('id').last().amount
