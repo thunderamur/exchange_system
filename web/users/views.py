@@ -9,8 +9,7 @@ User = get_user_model()
 
 
 class UserAPIView(APIView):
-    # permission_classes = [permissions.IsAdminUser]
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAdminUser]
 
     def get(self, request):
         user_id = request.GET.get('user_id')

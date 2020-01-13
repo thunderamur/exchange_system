@@ -17,6 +17,7 @@ class UserManager(BaseUserManager):
         email = self.normalize_email(email)
 
         user = User(
+            username=email,
             email=email,
             currency=currency,
         )
