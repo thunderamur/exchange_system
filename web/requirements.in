@@ -1,4 +1,7 @@
 django
+django-rest-framework
+djoser
 gunicorn
 psycopg2-binary
+pytest-django
 requests
