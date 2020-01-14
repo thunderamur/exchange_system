@@ -61,7 +61,7 @@ def get_new_rates(base=None):
 
 def get_rates():
     rates = {}
-    for currency in Currency.objects.filter(currency__in=Currency.CURRENCIES).order_by('currency', '-datetime').\
+    for currency in Currency.objects.filter(currency__in=Currency.CURRENCIES).order_by('currency', '-id').\
             distinct('currency'):
         rates.update({currency.currency: currency.rate})
     return rates
