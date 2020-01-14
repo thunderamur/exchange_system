@@ -1,6 +1,6 @@
 from django.db import models, transaction
 
-from balances.logic import update_balance
+from balances.logic import create_new_balance
 from currencies.models import Currency
 from transactions.logic import get_amount
 
@@ -17,8 +17,8 @@ class TransactionManager(models.Manager):
 
         with transaction.atomic():
             transaction_ = super().create(**kwargs)
-            update_balance(from_user, -from_amount)
-            update_balance(to_user, to_amount)
+            create_new_balance(from_user, -from_amount)
+            create_new_balance(to_user, to_amount)
 
         return transaction_
 

@@ -1,4 +1,4 @@
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-* */1    * * *   root    python /app/manage.py update_currency_rates
+*/30 *    * * *   root    python /app/manage.py update_currency_rates

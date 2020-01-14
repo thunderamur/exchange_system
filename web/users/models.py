@@ -2,6 +2,7 @@ from django.db import models, transaction
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 
+from balances.logic import get_balance
 from balances.models import Balance
 from currencies.models import Currency
 
@@ -38,7 +39,6 @@ class UserManager(BaseUserManager):
             user=user,
             currency=currency,
             amount=start_balance,
-            flow=start_balance,
         )
 
         with transaction.atomic():
@@ -75,6 +75,6 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     def get_balance(self):
-        balance = Balance.objects.filter(user=self.id).order_by('id').last()
+        balance = get_balance(self)
         if balance:
             return balance.amount

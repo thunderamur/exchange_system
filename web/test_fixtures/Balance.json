@@ -1,0 +1,42 @@
+[
+{
+  "model": "balances.balance",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "currency": "EUR",
+    "amount": "0.00",
+    "created": "2020-01-14T10:34:44.446Z"
+  }
+},
+{
+  "model": "balances.balance",
+  "pk": 2,
+  "fields": {
+    "user": 5,
+    "currency": "EUR",
+    "amount": "0.00",
+    "created": "2020-01-14T10:42:11.582Z"
+  }
+},
+{
+  "model": "balances.balance",
+  "pk": 3,
+  "fields": {
+    "user": 6,
+    "currency": "EUR",
+    "amount": "0.00",
+    "created": "2020-01-14T10:42:19.908Z"
+  }
+},
+{
+  "model": "balances.balance",
+  "pk": 4,
+  "fields": {
+    "user": 7,
+    "currency": "EUR",
+    "amount": "0.00",
+    "created": "2020-01-14T10:42:24.629Z"
+  }
+}
+]
