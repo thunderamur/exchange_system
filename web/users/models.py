@@ -7,12 +7,23 @@ from currencies.models import Currency
 
 
 class UserManager(BaseUserManager):
-    def create(self, email, password=None, currency=None, start_balance=0):
-        return self.create_user(email=email, password=password, currency=currency, start_balance=start_balance)
+    def create(self, *args, **kwargs):
+        return self.create_user(*args, **kwargs)
 
-    def create_user(self, email, password=None, currency=None, start_balance=0):
+    def create_user(self, *args, **kwargs):
+        email = kwargs.get('email')
+        password = kwargs.get('password')
+        currency = kwargs.get('currency')
+        start_balance = kwargs.get('start_balance')
+
         if not email:
             raise ValueError('Users must have an email address')
+
+        if not currency:
+            currency = Currency.BASE
+
+        if not start_balance:
+            start_balance = 0
 
         email = self.normalize_email(email)
 
@@ -38,10 +49,11 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, email, password=None):
         user = self.create_user(
-            email,
+            email=email,
             password=password,
         )
-        user.is_admin = True
+        user.is_staff = True
+        user.is_superuser = True
         user.save(using=self._db)
         return user
 
@@ -62,29 +74,7 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    # def save(self, start_balance=0, *args, **kwargs,):
-    #     email = kwargs.get('email')
-    #     password = kwargs.get('password')
-    #     currency = kwargs.get('currency')
-    #
-    #     user = User(
-    #         email=email,
-    #         currency=currency,
-    #     )
-    #     user.set_password(password)
-    #
-    #     balance = Balance(
-    #         user=user,
-    #         currency=currency,
-    #         amount=start_balance,
-    #         flow=start_balance,
-    #     )
-    #
-    #     with transaction.atomic():
-    #         super().save(*args, **kwargs)
-    #         balance.save()
-
     def get_balance(self):
         balance = Balance.objects.filter(user=self.id).order_by('id').last()
         if balance:
-            return Balance.objects.filter(user=self.id).order_by('id').last().amount
+            return balance.amount
