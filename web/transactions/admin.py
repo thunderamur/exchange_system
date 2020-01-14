@@ -5,6 +5,6 @@ from .models import Transaction
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
-    fields = '__all__'
-    list_display = ['from_user', 'to_user', 'currency', 'amount', 'created']
+    fields = ['from_user', 'to_user', 'currency', 'amount', 'created']
+    list_display = fields
     readonly_fields = fields

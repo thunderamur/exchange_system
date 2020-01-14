@@ -1,5 +1,3 @@
-from django.db.models import F
-
 from .models import Balance
 
 

@@ -22,10 +22,10 @@ class Currency(models.Model):
 
     currency = models.CharField(choices=CURRENCY_CHOICES, max_length=3)
     rate = models.FloatField()
-    datetime = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.currency}: {self.rate} ({self.datetime})'
+        return f'{self.currency}: {self.rate} ({self.created})'
 
     class Meta:
-        ordering = ['-datetime']
+        ordering = ['-id']

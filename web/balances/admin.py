@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Balance
+
+
+@admin.register(Balance)
+class BalanceAdmin(admin.ModelAdmin):
+    fields = ['user', 'currency', 'amount', 'flow', 'created']
+    list_display = fields
+    readonly_fields = fields

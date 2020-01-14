@@ -11,4 +11,4 @@ class Balance(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.amount} {self.currency} (USER_ID: {self.user_id})'
+        return f'{self.amount} {self.currency} (USER_ID: {self.user.id})'
