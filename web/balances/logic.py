@@ -1,3 +1,6 @@
+from decimal import Decimal
+
+from .exceptions import NotEnoughBalance
 from .models import Balance
 
 
@@ -19,8 +22,14 @@ def create_new_balance(user, amount):
     current_amount = 0
     if balance:
         current_amount = balance.amount
+
+    new_amount = current_amount + amount
+
+    if new_amount < Decimal('0.00'):
+        raise NotEnoughBalance
+
     return Balance.objects.create(
         user=user,
         currency=user.currency,
-        amount=current_amount + amount,
+        amount=new_amount,
     )
