@@ -13,9 +13,9 @@
   "model": "balances.balance",
   "pk": 2,
   "fields": {
-    "user": 5,
+    "user": 2,
     "currency": "EUR",
-    "amount": "0.00",
+    "amount": "10.00",
     "created": "2020-01-14T10:42:11.582Z"
   }
 },
@@ -23,9 +23,9 @@
   "model": "balances.balance",
   "pk": 3,
   "fields": {
-    "user": 6,
-    "currency": "EUR",
-    "amount": "0.00",
+    "user": 3,
+    "currency": "USD",
+    "amount": "100.00",
     "created": "2020-01-14T10:42:19.908Z"
   }
 },
@@ -33,10 +33,20 @@
   "model": "balances.balance",
   "pk": 4,
   "fields": {
-    "user": 7,
-    "currency": "EUR",
+    "user": 4,
+    "currency": "RUB",
     "amount": "0.00",
     "created": "2020-01-14T10:42:24.629Z"
+  }
+},
+{
+  "model": "balances.balance",
+  "pk": 5,
+  "fields": {
+    "user": 4,
+    "currency": "RUB",
+    "amount": "1000.00",
+    "created": "2020-01-14T10:43:24.629Z"
   }
 }
 ]
