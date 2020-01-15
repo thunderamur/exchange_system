@@ -7,6 +7,7 @@ def django_db_setup(django_db_setup, django_db_blocker):
 
     fixtures = [
         'test_fixtures/Balance.json',
+        'test_fixtures/Currency.json',
         'test_fixtures/User.json',
     ]
 

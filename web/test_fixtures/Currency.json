@@ -3,6 +3,15 @@
   "model": "currencies.currency",
   "pk": 1,
   "fields": {
+    "currency": "RUB",
+    "rate": 68.041,
+    "created": "2020-01-11T02:08:42.586Z"
+  }
+},
+{
+  "model": "currencies.currency",
+  "pk": 2,
+  "fields": {
     "currency": "USD",
     "rate": 1.1115,
     "created": "2020-01-15T02:08:42.553Z"
@@ -10,7 +19,7 @@
 },
 {
   "model": "currencies.currency",
-  "pk": 2,
+  "pk": 3,
   "fields": {
     "currency": "GBP",
     "rate": 0.85618,
@@ -19,7 +28,7 @@
 },
 {
   "model": "currencies.currency",
-  "pk": 3,
+  "pk": 4,
   "fields": {
     "currency": "RUB",
     "rate": 68.2418,
@@ -28,7 +37,7 @@
 },
 {
   "model": "currencies.currency",
-  "pk": 4,
+  "pk": 5,
   "fields": {
     "currency": "BTC",
     "rate": 0.00012714890572313473,

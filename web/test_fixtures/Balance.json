@@ -48,5 +48,45 @@
     "amount": "1000.00",
     "created": "2020-01-14T10:43:24.629Z"
   }
+},
+{
+  "model": "balances.balance",
+  "pk": 6,
+  "fields": {
+    "user": 3,
+    "currency": "USD",
+    "amount": "99.00",
+    "created": "2020-01-15T02:54:16.959Z"
+  }
+},
+{
+  "model": "balances.balance",
+  "pk": 7,
+  "fields": {
+    "user": 4,
+    "currency": "RUB",
+    "amount": "1061.40",
+    "created": "2020-01-15T02:54:16.961Z"
+  }
+},
+{
+  "model": "balances.balance",
+  "pk": 8,
+  "fields": {
+    "user": 4,
+    "currency": "RUB",
+    "amount": "993.16",
+    "created": "2020-01-15T02:54:16.966Z"
+  }
+},
+{
+  "model": "balances.balance",
+  "pk": 9,
+  "fields": {
+    "user": 2,
+    "currency": "EUR",
+    "amount": "11.00",
+    "created": "2020-01-15T02:54:16.968Z"
+  }
 }
 ]

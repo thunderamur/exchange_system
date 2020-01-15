@@ -2,5 +2,5 @@ class BaseBalanceError(Exception):
     pass
 
 
-class NotEnoughBalance(Exception):
+class NotEnoughBalanceError(BaseBalanceError):
     pass

@@ -1,7 +1,14 @@
 import decimal
-from django.db.models import Q
+from datetime import datetime, timedelta
 
+from pytz import utc
+
+from .exceptions import NotCurrencyOnDateError, WrongDateFormatError
 from .models import Currency
+
+
+def get_utc_date(date):
+    return datetime.strptime(date, '%Y-%m-%d').astimezone(utc)
 
 
 # TODO: cache
@@ -9,27 +16,27 @@ def get_rate(currency, date=None):
     if currency == Currency.BASE:
         return 1.0
 
+    if date:
+        if isinstance(date, str):
+            date = get_utc_date(date)
+        elif not isinstance(date, datetime):
+            raise WrongDateFormatError
+        date += timedelta(days=1)
+
     q = Currency.objects.filter(currency=currency)
     if date:
-        q = q.filter(date__lte=date)
+        q = q.filter(created__lte=date)
 
-    return q.order_by('-id').first().rate
+    currency_on_date = q.order_by('id').last()
+
+    if not currency_on_date:
+        raise NotCurrencyOnDateError
+
+    return currency_on_date.rate
 
 
 # TODO: cache
 def get_ratio(from_currency, to_currency, date=None):
-    # q = Currency.objects.filter(Q(currency=from_currency) | Q(currency=to_currency))
-    # if date:
-    #     q = q.filter(datetime_lte=date)
-    #
-    # from_rate = None
-    # to_rate = None
-    # for c in q.order_by('currency', '-id').distinct('currency').all()
-    #     if c.currency == from_currency:
-    #         from_rate = c.rate
-    #     if c.currency == to_currency:
-    #         to_rate = c.rate
-
     from_rate = get_rate(from_currency, date)
     to_rate = get_rate(to_currency, date)
 
@@ -48,6 +55,6 @@ def get_convert_amount(from_amount, from_currency, to_currency):
     return get_decimal(result, '1.00')
 
 
-def get_decimal(value, format):
+def get_decimal(value, fmt):
     result = decimal.Decimal(value)
-    return result.quantize(decimal.Decimal(format), decimal.ROUND_HALF_EVEN)
+    return result.quantize(decimal.Decimal(fmt), decimal.ROUND_HALF_EVEN)

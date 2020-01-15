@@ -1,0 +1,24 @@
+[
+{
+  "model": "transactions.transaction",
+  "pk": 1,
+  "fields": {
+    "from_user": 3,
+    "to_user": 4,
+    "currency": "USD",
+    "amount": "1.00",
+    "created": "2020-01-15T02:54:16.956Z"
+  }
+},
+{
+  "model": "transactions.transaction",
+  "pk": 2,
+  "fields": {
+    "from_user": 4,
+    "to_user": 2,
+    "currency": "EUR",
+    "amount": "1.00",
+    "created": "2020-01-15T02:54:16.965Z"
+  }
+}
+]
