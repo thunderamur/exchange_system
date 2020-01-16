@@ -2,6 +2,7 @@ django
 django-rest-framework
 djoser
 gunicorn
+mock
 psycopg2-binary
 pytest-django
 requests

@@ -2,7 +2,7 @@ from django.db import models, transaction
 
 from balances.logic import create_new_balance
 from currencies.models import Currency
-from transactions.logic import get_amount
+from currencies.logic import get_convert_amount
 
 
 class TransactionManager(models.Manager):
@@ -12,8 +12,8 @@ class TransactionManager(models.Manager):
         currency = kwargs.get('currency')
         amount = kwargs.get('amount')
 
-        from_amount = get_amount(amount, currency, from_user.currency)
-        to_amount = get_amount(amount, currency, to_user.currency)
+        from_amount = get_convert_amount(amount, currency, from_user.currency)
+        to_amount = get_convert_amount(amount, currency, to_user.currency)
 
         with transaction.atomic():
             transaction_ = super().create(**kwargs)

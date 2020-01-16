@@ -1,8 +1,6 @@
-from datetime import datetime
-
 import pytest
+from datetime import datetime
 from decimal import Decimal
-from django.contrib.auth import get_user_model
 from pytz import utc
 
 from currencies.exceptions import NotCurrencyOnDateError
@@ -14,8 +12,6 @@ from currencies.logic import (
     get_utc_date,
 )
 from currencies.models import Currency
-
-User = get_user_model()
 
 
 def test_get_utc_date():

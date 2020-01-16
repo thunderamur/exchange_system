@@ -16,6 +16,7 @@ djoser==2.0.3
 gunicorn==20.0.4
 idna==2.8                 # via requests
 importlib-metadata==1.4.0  # via pluggy, pytest
+mock==3.0.5
 more-itertools==8.1.0     # via pytest, zipp
 packaging==20.0           # via pytest
 pluggy==0.13.1            # via pytest
@@ -26,7 +27,7 @@ pytest-django==3.8.0
 pytest==5.3.2             # via pytest-django
 pytz==2019.3              # via django
 requests==2.22.0
-six==1.13.0               # via packaging
+six==1.14.0               # via mock, packaging
 sqlparse==0.3.0           # via django
 urllib3==1.25.7           # via requests
 wcwidth==0.1.8            # via pytest

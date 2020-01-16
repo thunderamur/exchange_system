@@ -39,7 +39,6 @@ def get_rate(currency, date=None):
 def get_ratio(from_currency, to_currency, date=None):
     from_rate = get_rate(from_currency, date)
     to_rate = get_rate(to_currency, date)
-
     return to_rate/from_rate
 
 
@@ -50,6 +49,9 @@ def get_convert_amount(from_amount, from_currency, to_currency):
     :param to_currency: Currency of result
     :return: Decimal
     """
+    if from_currency == to_currency:
+        return from_amount
+
     ratio = get_ratio(from_currency, to_currency)
     result = float(from_amount) * ratio
     return get_decimal(result, '1.00')
