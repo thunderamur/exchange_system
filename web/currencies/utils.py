@@ -5,6 +5,10 @@ from .models import Currency
 
 
 def get_data(url):
+    """
+    :param url: str
+    :return: dict
+    """
     response = requests.get(url)
     response.raise_for_status()
 
@@ -12,6 +16,12 @@ def get_data(url):
 
 
 def get_rates_exchangeratesapi(date=None, base=None, symbols=None):
+    """
+    :param date: str | datetime. str format: %Y-%m-%d
+    :param base: Currency.CURRENCIES
+    :param symbols: Currency.CURRENCIES
+    :return: dict
+    """
     url = 'https://api.exchangeratesapi.io'
 
     if date is None:
@@ -30,6 +40,10 @@ def get_rates_exchangeratesapi(date=None, base=None, symbols=None):
 
 
 def get_rates_coinmarketcap(base=None):
+    """
+    :param base: Currency.CURRENCIES
+    :return: dict
+    """
     url = 'https://api.coinmarketcap.com/v1/ticker/bitcoin'
 
     if base is None:
@@ -48,6 +62,10 @@ def get_rates_coinmarketcap(base=None):
 
 
 def get_new_rates(base=None):
+    """
+    :param base: Currency.CURRENCIES
+    :return: dict
+    """
     rates = get_rates_coinmarketcap(base=base)
     symbols = f'{Currency.RUB},{Currency.USD},{Currency.GBP}'
     rates.update(get_rates_exchangeratesapi(base=base, symbols=symbols))
@@ -56,6 +74,9 @@ def get_new_rates(base=None):
 
 
 def get_rates():
+    """
+    :return: dict
+    """
     rates = {}
     for currency in Currency.objects.filter(currency__in=Currency.CURRENCIES).order_by('currency', '-id').\
             distinct('currency'):
@@ -65,6 +86,9 @@ def get_rates():
 
 
 def update_rates():
+    """
+    Update currency's rates. Used in manage.py command.
+    """
     saved_rates = get_rates()
     new_rates = get_new_rates()
     for currency in Currency.CURRENCIES:

@@ -13,14 +13,16 @@ User = get_user_model()
 class TransactionAPIView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
-    def get(self, request):
+    @staticmethod
+    def get(request):
         user = request.user
         transactions = Transaction.objects.filter(Q(from_user=user) | Q(to_user=user))
         serializer = TransactionSerializer(transactions, many=True)
 
         return Response({'data': serializer.data})
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         from_user = request.user
         to_user = User.objects.get(email=request.POST.get('user'))
         amount = request.POST.get('amount')

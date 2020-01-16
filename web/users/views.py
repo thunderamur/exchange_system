@@ -11,7 +11,8 @@ User = get_user_model()
 class UserAPIView(APIView):
     permission_classes = [permissions.IsAdminUser]
 
-    def get(self, request):
+    @staticmethod
+    def get(request):
         user_id = request.GET.get('user_id')
         q = User.objects
         if user_id:
@@ -20,7 +21,8 @@ class UserAPIView(APIView):
 
         return Response({'data': serializer.data})
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         user_serializer = UserCreateSerializer(data=request.data)
 
         status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
